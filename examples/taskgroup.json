@@ -1,0 +1,259 @@
+{
+   "tasks" : [{
+         "name" : "sub01-docker",
+         "task_id" : {
+            "value" : "sub01-docker"
+         },
+         "agent_id" : {
+            "value" : ""
+         },
+         "resources" : [{
+               "name" : "cpus",
+               "type" : "SCALAR",
+               "scalar" : {
+                  "value" : 0.5
+               },
+               "role" : "*"
+            }, {
+               "name" : "mem",
+               "type" : "SCALAR",
+               "scalar" : {
+                  "value" : 32
+               },
+               "role" : "*"
+            }
+         ],
+         "command" : {
+            "value" : "sleep 60 && ls -ltr && df"
+         },
+         "container" : {
+            "type" : "DOCKER",
+            "docker" : {
+               "image" : "alpine"
+            }
+         }
+      }, {
+         "name" : "sub02-docker",
+         "task_id" : {
+            "value" : "sub02-docker"
+         },
+         "agent_id" : {
+            "value" : ""
+         },
+         "resources" : [{
+               "name" : "cpus",
+               "type" : "SCALAR",
+               "scalar" : {
+                  "value" : 0.5
+               },
+               "role" : "*"
+            }, {
+               "name" : "mem",
+               "type" : "SCALAR",
+               "scalar" : {
+                  "value" : 32
+               },
+               "role" : "*"
+            }
+         ],
+         "command" : {
+            "value" : "sleep 60 && ls -ltr && df"
+         },
+         "container" : {
+            "type" : "DOCKER",
+            "docker" : {
+               "image" : "alpine"
+            }
+         }
+      }, {
+         "name" : "sub03",
+         "task_id" : {
+            "value" : "sub03"
+         },
+         "agent_id" : {
+            "value" : ""
+         },
+         "resources" : [{
+               "name" : "cpus",
+               "type" : "SCALAR",
+               "scalar" : {
+                  "value" : 0.1
+               },
+               "role" : "*"
+            }, {
+               "name" : "mem",
+               "type" : "SCALAR",
+               "scalar" : {
+                  "value" : 32
+               },
+               "role" : "*"
+            }
+         ],
+         "command" : {
+            "value" : "lsblk"
+         }
+      }, {
+         "name" : "sub04",
+         "task_id" : {
+            "value" : "sub04"
+         },
+         "agent_id" : {
+            "value" : ""
+         },
+         "resources" : [{
+               "name" : "cpus",
+               "type" : "SCALAR",
+               "scalar" : {
+                  "value" : 0.1
+               },
+               "role" : "*"
+            }, {
+               "name" : "mem",
+               "type" : "SCALAR",
+               "scalar" : {
+                  "value" : 32
+               },
+               "role" : "*"
+            }
+         ],
+         "command" : {
+            "value" : "lsblk"
+         }
+      }, {
+         "name" : "sub05",
+         "task_id" : {
+            "value" : "sub05"
+         },
+         "agent_id" : {
+            "value" : ""
+         },
+         "resources" : [{
+               "name" : "cpus",
+               "type" : "SCALAR",
+               "scalar" : {
+                  "value" : 0.1
+               },
+               "role" : "*"
+            }, {
+               "name" : "mem",
+               "type" : "SCALAR",
+               "scalar" : {
+                  "value" : 32
+               },
+               "role" : "*"
+            }
+         ],
+         "command" : {
+            "value" : "lsblk"
+         }
+      }, {
+         "name" : "sub06",
+         "task_id" : {
+            "value" : "sub06"
+         },
+         "agent_id" : {
+            "value" : ""
+         },
+         "resources" : [{
+               "name" : "cpus",
+               "type" : "SCALAR",
+               "scalar" : {
+                  "value" : 0.1
+               },
+               "role" : "*"
+            }, {
+               "name" : "mem",
+               "type" : "SCALAR",
+               "scalar" : {
+                  "value" : 32
+               },
+               "role" : "*"
+            }
+         ],
+         "command" : {
+            "value" : "lsblk"
+         }
+      }, {
+         "name" : "sub07",
+         "task_id" : {
+            "value" : "sub07"
+         },
+         "agent_id" : {
+            "value" : ""
+         },
+         "resources" : [{
+               "name" : "cpus",
+               "type" : "SCALAR",
+               "scalar" : {
+                  "value" : 0.1
+               },
+               "role" : "*"
+            }, {
+               "name" : "mem",
+               "type" : "SCALAR",
+               "scalar" : {
+                  "value" : 32
+               },
+               "role" : "*"
+            }
+         ],
+         "command" : {
+            "value" : "lsblk"
+         }
+      }, {
+         "name" : "sub08",
+         "task_id" : {
+            "value" : "sub08"
+         },
+         "agent_id" : {
+            "value" : ""
+         },
+         "resources" : [{
+               "name" : "cpus",
+               "type" : "SCALAR",
+               "scalar" : {
+                  "value" : 0.1
+               },
+               "role" : "*"
+            }, {
+               "name" : "mem",
+               "type" : "SCALAR",
+               "scalar" : {
+                  "value" : 32
+               },
+               "role" : "*"
+            }
+         ],
+         "command" : {
+            "value" : "lsblk"
+         }
+      }, {
+         "name" : "sub09",
+         "task_id" : {
+            "value" : "sub09"
+         },
+         "agent_id" : {
+            "value" : ""
+         },
+         "resources" : [{
+               "name" : "cpus",
+               "type" : "SCALAR",
+               "scalar" : {
+                  "value" : 2.1
+               },
+               "role" : "*"
+            }, {
+               "name" : "mem",
+               "type" : "SCALAR",
+               "scalar" : {
+                  "value" : 32
+               },
+               "role" : "*"
+            }
+         ],
+         "command" : {
+            "value" : "lsblk"
+         }
+      }
+   ]
+}
