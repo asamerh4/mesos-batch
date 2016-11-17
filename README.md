@@ -1,5 +1,5 @@
 # mesos-batch
-commandline mesos batch processing framework
+commandline mesos batch processing framework (for mesos 1.1.X+)
 
 ```sh
 Usage: mesos-batch [options]
