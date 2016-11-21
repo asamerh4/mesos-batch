@@ -1,3 +1,6 @@
-[submodule "mesos"]
-	path = mesos
+[submodule "build-img/mesos-rpm-packaging"]
+	path = build-img/mesos-rpm-packaging
+	url = https://github.com/mesosphere/mesos-deb-packaging.git
+[submodule "build-img/mesos"]
+	path = build-img/mesos
 	url = https://github.com/asamerh4/mesos.git

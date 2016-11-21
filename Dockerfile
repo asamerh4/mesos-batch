@@ -1,15 +1,10 @@
-FROM centos:7
+FROM centos:centos7.2.1511
 
-RUN yum install -y which && \
-  yum groupinstall -y 'Development Tools' && \
-  yum install -y epel-release clang git maven cmake java-1.8.0-openjdk-devel \
-    python-devel zlib-devel libcurl-devel openssl-devel cyrus-sasl-devel cyrus-sasl-md5 \
-    apr-devel subversion-devel apr-utils-devel libevent-devel libev-devel
+MAINTAINER Hubert Asamer
 
-ENV CC gcc
-ENV CXX g++
-ENV ENVIRONMENT 'GLOG_v=1 MESOS_VERBOSE=1'
+COPY build-img/rpm/pkg.rpm /
 
-COPY mesos /mesos/
 
-RUN cd /mesos && ./bootstrap && mkdir build && cd build && ../configure && make -j 72 && make install && cd / && rm -rf /mesos
+RUN yum install -y subversion cyrus-sasl-md5 libevent-devel
+RUN rpm -Uvh pkg.rpm
+RUN rm pkg.rpm
