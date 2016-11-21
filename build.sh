@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 
+git submodule update --init --recursive
+
 ROOT_DIR=$(pwd)
 NPROC=$(nproc)
 cd build-img/mesos
