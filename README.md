@@ -1,6 +1,24 @@
 # mesos-batch
-commandline mesos batch processing framework (for mesos 1.1.X+)
+commandline mesos batch processing framework (for mesos 1.1.X+) as docker image (still in early beta, not intended for production use)
 
+## features
+- parallel job execution (multiple tasks specified in protobuf/JSON)
+- no task grouping like in pods, but sequential execution within each offer (->parallel processing)
+- optional usage of dynamic reservations & subsequent creation of persistent volumes (specified via resources message of TaskInfo proto)
+- decoupled reserve/unreserve operations
+
+## build
+use build.sh script to generate a mesos-batch docker image which contains a recent mesos build from asamerh4/mesos. Note that in the process of build.sh a temporary build-image is generated, which could be removed afterwards.
+
+Once build.sh finishes successfully a message like this should be displayed:
+```sh
+Successfully built de7bd82c8b50
+**build finished -> use: docker run --rm -it asamerh4/mesos-batch:3caf670 mesos-batch --h
+```
+## run
+Use docker run --rm -it asamerh4/mesos-batch:#build-tag# mesos-batch
+
+## usage
 ```sh
 Usage: mesos-batch [options]
 
