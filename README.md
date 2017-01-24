@@ -3,7 +3,7 @@ commandline mesos batch processing framework (for mesos 1.1.X+) as docker image 
 
 ## features
 - parallel job execution (multiple tasks specified in protobuf/JSON)
-- no task grouping like in pods, but sequential execution within each offer (->parallel processing)
+- no task grouping like in pods, but queued execution within each offer (->parallel processing accross offers)
 - optional usage of dynamic reservations & subsequent creation of persistent volumes (specified via resources message of TaskInfo proto)
 - decoupled reserve/unreserve operations
 
