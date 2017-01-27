@@ -19,7 +19,7 @@ Successfully built de7bd82c8b50
 Use docker run --rm -it asamerh4/mesos-batch:#build-tag# mesos-batch
 
 ## usage
-```sh
+```
  __ `__ \    _ \   __|   _ \    __|
  |   |   |   __/ \__ \  (   | \__ \ __|
 _|  _|  _| \___| ____/ \___/  ____/
