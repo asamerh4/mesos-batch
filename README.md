@@ -20,22 +20,96 @@ Use docker run --rm -it asamerh4/mesos-batch:#build-tag# mesos-batch
 
 ## usage
 ```sh
-Usage: mesos-batch [options]
+ __ `__ \    _ \   __|   _ \    __|
+ |   |   |   __/ \__ \  (   | \__ \ __|
+_|  _|  _| \___| ____/ \___/  ____/
+ |             |          |
+ __ \    _` |  __|   __|  __ \
+ |   |  (   |  |    (     | | |
+_.__/  \__,_| \__| \___| _| |_|
+commandline batch processing framework for mesos 1.1++ -> github.com/asamerh4/mesos-batch
+
+Flag 'master' is required, but it was not provided
+
+Usage: lt-mesos-batch [options]
 
   --[no-]checkpoint                      Enable checkpointing for the framework. (default: false)
   --content_type=VALUE                   The content type to use for scheduler protocol messages. 'json'
                                          and 'protobuf' are valid choices. (default: protobuf)
   --framework_capabilities=VALUE         Comma separated list of optional framework capabilities to enable.
-                                         (e.g. 'SHARED_RESOURCES' or 'GPU_RESOURCES')
-  --framework_name=VALUE                 name of the framework (default: mesos-execute instance)
+                                         TASK_KILLING_STATE is always enabled. PARTITION_AWARE is enabled
+                                         unless --no-partition-aware is specified.
+                                         other choices are e.g. 'SHARED_RESOURCES' or 'GPU_RESOURCES'
+  --framework_name=VALUE                 name of the framework (default: mesos-batch instance)
   --[no-]help                            Prints this help message (default: false)
   --kill_after=VALUE                     Specifies a delay after which the task is killed
                                          (e.g., 10secs, 2mins, etc).
   --master=VALUE                         Mesos master (e.g., IP:PORT). (default: )
+  --[no-]partition_aware                 Enable partition-awareness for the framework. (default: true)
   --[no-]persistent_volume               Enable dynamic reservation and creation of a persistent volume (default: false)
-  --persistent_volume_resource=VALUE     message -> TaskInfo from mesos.proto
+  --persistent_volume_resource=VALUE     The value could be a JSON formatted string of `TaskInfo` or a
+                                         file path containing the JSON/protobuf. Path must
+                                         be of the form `file:///path/to/file` or `/path/to/file`.
+                                         See the `TaskInfo` and the contained `Resource` messages
+                                         in `mesos.proto` for the expected format.
+                                         NOTE: `DiskInfo` inside the `disk` Resource must be present.
+
+                                         Example:
+                                         {
+                                           "name": "persistent_vol_resource_spec",
+                                           "task_id": {
+                                              "value": "resource_spec001"
+                                           },
+                                           "agent_id": {
+                                              "value": ""
+                                           },
+                                           "resources": [{
+                                                "name": "cpus",
+                                                 "type": "SCALAR",
+                                                 "scalar": {
+                                                    "value": 3.0
+                                                 },
+                                                 "role": "test",
+                                                 "reservation": {
+                                                    "principal": "test"
+                                                 }
+                                              }, {
+                                                 "name": "mem",
+                                                 "type": "SCALAR",
+                                                 "scalar": {
+                                                    "value": 64
+                                                 },
+                                                 "role": "test",
+                                                 "reservation": {
+                                                    "principal": "test"
+                                                 }
+                                              }, {
+                                                 "name": "disk",
+                                                 "type": "SCALAR",
+                                                 "scalar": {
+                                                    "value": 4096
+                                                 },
+                                                 "role": "test",
+                                                 "reservation": {
+                                                    "principal": "test"
+                                                 },
+                                                 "disk": {
+                                                    "persistence": {
+                                                       "id": "22d664c4-15d2-4978-86e3-d9b5d310666f",
+                                                       "principal": "test"
+                                                    },
+                                                    "volume": {
+                                                       "container_path": "volume",
+                                                       "mode": "RW"
+                                                    }
+                                                 }
+                                              }
+                                           ]
+                                         }
   --principal=VALUE                      The principal to use for framework authentication.
-  --[no-]remove_persistent_volume        Unreserves dynamic reservations and removes persistent volumes if any (default: false)
+  --[no-]remove_persistent_volume        Unreserves dynamic reservations and removes persistent volumes
+                                         if any
+                                         (default: false)
   --role=VALUE                           Role to use when registering. (default: *)
   --secret=VALUE                         The secret to use for framework authentication.
   --task_list=VALUE                      The value could be a JSON-formatted string of `TaskGroupInfo` or a
@@ -46,40 +120,46 @@ Usage: mesos-batch [options]
 
                                          Example:
                                          {
-                                            "tasks" : [{
-                                                  "name" : "sub01-docker",
-                                                  "task_id" : {
-                                                     "value" : "sub01-docker"
-                                                  },
-                                                  "agent_id" : {
-                                                     "value" : ""
-                                                  },
-                                                  "resources" : [{
-                                                        "name" : "cpus",
-                                                        "type" : "SCALAR",
-                                                        "scalar" : {
-                                                           "value" : 0.5
-                                                        },
-                                                        "role" : "*"
-                                                     }, {
-                                                        "name" : "mem",
-                                                        "type" : "SCALAR",
-                                                        "scalar" : {
-                                                           "value" : 32
-                                                        },
-                                                        "role" : "*"
-                                                     }
-                                                  ],
-                                                  "command" : {
-                                                     "value" : "sleep 60 && ls -ltr && df"
-                                                  },
-                                                  "container" : {
-                                                     "type" : "DOCKER",
-                                                     "docker" : {
-                                                        "image" : "alpine"
-                                                     }
-                                                  }
-                                               }
-                                            ]
+                                           "tasks": [{
+                                                 "name": "sub01-docker",
+                                                 "task_id": {
+                                                    "value": "sub01-docker"
+                                                 },
+                                                 "agent_id": {
+                                                    "value": ""
+                                                 },
+                                                 "resources": [{
+                                                       "name": "cpus",
+                                                       "type": "SCALAR",
+                                                       "scalar": {
+                                                          "value": 2.5
+                                                       },
+                                                       "role": "test",
+                                                       "reservation": {
+                                                          "principal": "test"
+                                                       }
+                                                    }, {
+                                                       "name": "mem",
+                                                       "type": "SCALAR",
+                                                       "scalar": {
+                                                          "value": 32
+                                                       },
+                                                       "role": "test",
+                                                       "reservation": {
+                                                          "principal": "test"
+                                                       }
+                                                    }
+                                                 ],
+                                                 "command": {
+                                                    "value": "ls -ltr && df"
+                                                 },
+                                                 "container": {
+                                                    "type": "DOCKER",
+                                                    "docker": {
+                                                       "image": "alpine"
+                                                    }
+                                                 }
+                                              },{...},{...},{...},{...}
+                                           ]
                                          }
 ```
