@@ -1,0 +1,51 @@
+{
+   "name": "persistent_vol_resource_spec",
+   "task_id": {
+      "value": "resource_spec001"
+   },
+   "agent_id": {
+      "value": ""
+   },
+   "resources": [{
+         "name": "cpus",
+         "type": "SCALAR",
+         "scalar": {
+            "value": 3.0
+         },
+         "role": "test",
+         "reservation": {
+            "principal": "test"
+         }
+      }, {
+         "name": "mem",
+         "type": "SCALAR",
+         "scalar": {
+            "value": 64
+         },
+         "role": "test",
+         "reservation": {
+            "principal": "test"
+         }
+      }, {
+         "name": "disk",
+         "type": "SCALAR",
+         "scalar": {
+            "value": 4096
+         },
+         "role": "test",
+         "reservation": {
+            "principal": "test"
+         },
+         "disk": {
+            "persistence": {
+               "id": "22d664c4-15d2-4978-86e3-d9b5d310666f-ZZZ",
+               "principal": "test"
+            },
+            "volume": {
+               "container_path": "volume",
+               "mode": "RW"
+            }
+         }
+      }
+   ]
+}

@@ -1,258 +1,312 @@
 {
-   "tasks" : [{
-         "name" : "sub01-docker",
-         "task_id" : {
-            "value" : "sub01-docker"
+   "tasks": [{
+         "name": "sub01-docker",
+         "task_id": {
+            "value": "sub01-docker"
          },
-         "agent_id" : {
-            "value" : ""
+         "agent_id": {
+            "value": ""
          },
-         "resources" : [{
-               "name" : "cpus",
-               "type" : "SCALAR",
-               "scalar" : {
-                  "value" : 0.5
+         "resources": [{
+               "name": "cpus",
+               "type": "SCALAR",
+               "scalar": {
+                  "value": 2.5
                },
-               "role" : "*"
+               "role": "test",
+               "reservation": {
+                  "principal": "test"
+               }
             }, {
-               "name" : "mem",
-               "type" : "SCALAR",
-               "scalar" : {
-                  "value" : 32
+               "name": "mem",
+               "type": "SCALAR",
+               "scalar": {
+                  "value": 32
                },
-               "role" : "*"
+               "role": "test",
+               "reservation": {
+                  "principal": "test"
+               }
             }
          ],
-         "command" : {
-            "value" : "sleep 60 && ls -ltr && df"
+         "command": {
+            "value": "ls -ltr && df"
          },
-         "container" : {
-            "type" : "DOCKER",
-            "docker" : {
-               "image" : "alpine"
+         "container": {
+            "type": "DOCKER",
+            "docker": {
+               "image": "alpine"
             }
          }
       }, {
-         "name" : "sub02-docker",
-         "task_id" : {
-            "value" : "sub02-docker"
+         "name": "sub02-docker",
+         "task_id": {
+            "value": "sub02-docker"
          },
-         "agent_id" : {
-            "value" : ""
+         "agent_id": {
+            "value": ""
          },
-         "resources" : [{
-               "name" : "cpus",
-               "type" : "SCALAR",
-               "scalar" : {
-                  "value" : 0.5
+         "resources": [{
+               "name": "cpus",
+               "type": "SCALAR",
+               "scalar": {
+                  "value": 0.5
                },
-               "role" : "*"
+               "role": "test",
+               "reservation": {
+                  "principal": "test"
+               }
             }, {
-               "name" : "mem",
-               "type" : "SCALAR",
-               "scalar" : {
-                  "value" : 32
+               "name": "mem",
+               "type": "SCALAR",
+               "scalar": {
+                  "value": 32
                },
-               "role" : "*"
+               "role": "test",
+               "reservation": {
+                  "principal": "test"
+               }
             }
          ],
-         "command" : {
-            "value" : "sleep 60 && ls -ltr && df"
+         "command": {
+            "value": "ls -ltr && df"
          },
-         "container" : {
-            "type" : "DOCKER",
-            "docker" : {
-               "image" : "alpine"
+         "container": {
+            "type": "DOCKER",
+            "docker": {
+               "image": "alpine"
             }
          }
       }, {
-         "name" : "sub03",
-         "task_id" : {
-            "value" : "sub03"
+         "name": "sub03",
+         "task_id": {
+            "value": "sub03"
          },
-         "agent_id" : {
-            "value" : ""
+         "agent_id": {
+            "value": ""
          },
-         "resources" : [{
-               "name" : "cpus",
-               "type" : "SCALAR",
-               "scalar" : {
-                  "value" : 0.1
+         "resources": [{
+               "name": "cpus",
+               "type": "SCALAR",
+               "scalar": {
+                  "value": 0.1
                },
-               "role" : "*"
+               "role": "test",
+               "reservation": {
+                  "principal": "test"
+               }
             }, {
-               "name" : "mem",
-               "type" : "SCALAR",
-               "scalar" : {
-                  "value" : 32
+               "name": "mem",
+               "type": "SCALAR",
+               "scalar": {
+                  "value": 2
                },
-               "role" : "*"
+               "role": "test",
+               "reservation": {
+                  "principal": "test"
+               }
             }
          ],
-         "command" : {
-            "value" : "lsblk"
+         "command": {
+            "value": "lsblk"
          }
       }, {
-         "name" : "sub04",
-         "task_id" : {
-            "value" : "sub04"
+         "name": "sub04",
+         "task_id": {
+            "value": "sub04"
          },
-         "agent_id" : {
-            "value" : ""
+         "agent_id": {
+            "value": ""
          },
-         "resources" : [{
-               "name" : "cpus",
-               "type" : "SCALAR",
-               "scalar" : {
-                  "value" : 0.1
+         "resources": [{
+               "name": "cpus",
+               "type": "SCALAR",
+               "scalar": {
+                  "value": 0.1
                },
-               "role" : "*"
+               "role": "test",
+               "reservation": {
+                  "principal": "test"
+               }
             }, {
-               "name" : "mem",
-               "type" : "SCALAR",
-               "scalar" : {
-                  "value" : 32
+               "name": "mem",
+               "type": "SCALAR",
+               "scalar": {
+                  "value": 2
                },
-               "role" : "*"
+               "role": "test",
+               "reservation": {
+                  "principal": "test"
+               }
             }
          ],
-         "command" : {
-            "value" : "lsblk"
+         "command": {
+            "value": "lsblk"
          }
       }, {
-         "name" : "sub05",
-         "task_id" : {
-            "value" : "sub05"
+         "name": "sub05",
+         "task_id": {
+            "value": "sub05"
          },
-         "agent_id" : {
-            "value" : ""
+         "agent_id": {
+            "value": ""
          },
-         "resources" : [{
-               "name" : "cpus",
-               "type" : "SCALAR",
-               "scalar" : {
-                  "value" : 0.1
+         "resources": [{
+               "name": "cpus",
+               "type": "SCALAR",
+               "scalar": {
+                  "value": 0.1
                },
-               "role" : "*"
+               "role": "test",
+               "reservation": {
+                  "principal": "test"
+               }
             }, {
-               "name" : "mem",
-               "type" : "SCALAR",
-               "scalar" : {
-                  "value" : 32
+               "name": "mem",
+               "type": "SCALAR",
+               "scalar": {
+                  "value": 2
                },
-               "role" : "*"
+               "role": "test",
+               "reservation": {
+                  "principal": "test"
+               }
             }
          ],
-         "command" : {
-            "value" : "lsblk"
+         "command": {
+            "value": "lsblk"
          }
       }, {
-         "name" : "sub06",
-         "task_id" : {
-            "value" : "sub06"
+         "name": "sub06",
+         "task_id": {
+            "value": "sub06"
          },
-         "agent_id" : {
-            "value" : ""
+         "agent_id": {
+            "value": ""
          },
-         "resources" : [{
-               "name" : "cpus",
-               "type" : "SCALAR",
-               "scalar" : {
-                  "value" : 0.1
+         "resources": [{
+               "name": "cpus",
+               "type": "SCALAR",
+               "scalar": {
+                  "value": 0.1
                },
-               "role" : "*"
+               "role": "test",
+               "reservation": {
+                  "principal": "test"
+               }
             }, {
-               "name" : "mem",
-               "type" : "SCALAR",
-               "scalar" : {
-                  "value" : 32
+               "name": "mem",
+               "type": "SCALAR",
+               "scalar": {
+                  "value": 2
                },
-               "role" : "*"
+               "role": "test",
+               "reservation": {
+                  "principal": "test"
+               }
             }
          ],
-         "command" : {
-            "value" : "lsblk"
+         "command": {
+            "value": "lsblk"
          }
       }, {
-         "name" : "sub07",
-         "task_id" : {
-            "value" : "sub07"
+         "name": "sub07",
+         "task_id": {
+            "value": "sub07"
          },
-         "agent_id" : {
-            "value" : ""
+         "agent_id": {
+            "value": ""
          },
-         "resources" : [{
-               "name" : "cpus",
-               "type" : "SCALAR",
-               "scalar" : {
-                  "value" : 0.1
+         "resources": [{
+               "name": "cpus",
+               "type": "SCALAR",
+               "scalar": {
+                  "value": 0.1
                },
-               "role" : "*"
+               "role": "test",
+               "reservation": {
+                  "principal": "test"
+               }
             }, {
-               "name" : "mem",
-               "type" : "SCALAR",
-               "scalar" : {
-                  "value" : 32
+               "name": "mem",
+               "type": "SCALAR",
+               "scalar": {
+                  "value": 2
                },
-               "role" : "*"
+               "role": "test",
+               "reservation": {
+                  "principal": "test"
+               }
             }
          ],
-         "command" : {
-            "value" : "lsblk"
+         "command": {
+            "value": "lsblk"
          }
       }, {
-         "name" : "sub08",
-         "task_id" : {
-            "value" : "sub08"
+         "name": "sub08",
+         "task_id": {
+            "value": "sub08"
          },
-         "agent_id" : {
-            "value" : ""
+         "agent_id": {
+            "value": ""
          },
-         "resources" : [{
-               "name" : "cpus",
-               "type" : "SCALAR",
-               "scalar" : {
-                  "value" : 0.1
+         "resources": [{
+               "name": "cpus",
+               "type": "SCALAR",
+               "scalar": {
+                  "value": 0.1
                },
-               "role" : "*"
+               "role": "test",
+               "reservation": {
+                  "principal": "test"
+               }
             }, {
-               "name" : "mem",
-               "type" : "SCALAR",
-               "scalar" : {
-                  "value" : 32
+               "name": "mem",
+               "type": "SCALAR",
+               "scalar": {
+                  "value": 2
                },
-               "role" : "*"
+               "role": "test",
+               "reservation": {
+                  "principal": "test"
+               }
             }
          ],
-         "command" : {
-            "value" : "lsblk"
+         "command": {
+            "value": "lsblk"
          }
       }, {
-         "name" : "sub09",
-         "task_id" : {
-            "value" : "sub09"
+         "name": "sub09",
+         "task_id": {
+            "value": "sub09"
          },
-         "agent_id" : {
-            "value" : ""
+         "agent_id": {
+            "value": ""
          },
-         "resources" : [{
-               "name" : "cpus",
-               "type" : "SCALAR",
-               "scalar" : {
-                  "value" : 2.1
+         "resources": [{
+               "name": "cpus",
+               "type": "SCALAR",
+               "scalar": {
+                  "value": 2.1
                },
-               "role" : "*"
+               "role": "test",
+               "reservation": {
+                  "principal": "test"
+               }
             }, {
-               "name" : "mem",
-               "type" : "SCALAR",
-               "scalar" : {
-                  "value" : 32
+               "name": "mem",
+               "type": "SCALAR",
+               "scalar": {
+                  "value": 32
                },
-               "role" : "*"
+               "role": "test",
+               "reservation": {
+                  "principal": "test"
+               }
             }
          ],
-         "command" : {
-            "value" : "lsblk"
+         "command": {
+            "value": "lsblk | cowsay"
          }
       }
    ]
