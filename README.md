@@ -20,14 +20,19 @@ Use docker run --rm -it asamerh4/mesos-batch:#build-tag# mesos-batch
 
 ## usage
 ```
-┌┬┐┌─┐┌─┐┌─┐┌─┐   ┌┐ ┌─┐┌┬┐┌─┐┬ ┬
-│││├┤ └─┐│ │└─┐───├┴┐├─┤ │ │  ├─┤
-┴ ┴└─┘└─┘└─┘└─┘   └─┘┴ ┴ ┴ └─┘┴ ┴
+    ___         ___
+   /  /|       |\  \
+  /  / /    ___\ \  \
+ /  / /    |\__\\ \  \
+|\  \/  ___\|__| \/  /|
+\ \  \ |\__\     /  //
+ \ \__\\|__|    /_ //
+  \|__|        |__|/
 commandline batch processing framework for mesos 1.1++ -> github.com/asamerh4/mesos-batch
 
 Flag 'master' is required, but it was not provided
 
-Usage: lt-mesos-batch [options]
+Usage: mesos-batch [options]
 
   --[no-]checkpoint                      Enable checkpointing for the framework. (default: false)
   --content_type=VALUE                   The content type to use for scheduler protocol messages. 'json'
