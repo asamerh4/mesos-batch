@@ -33,7 +33,7 @@
             "value": "ls -ltr && df"
          },
          "container": {
-            "type": "DOCKER",
+            "type": "MESOS",
             "docker": {
                "image": "alpine"
             }
@@ -72,7 +72,7 @@
             "value": "ls -ltr && df"
          },
          "container": {
-            "type": "DOCKER",
+            "type": "MESOS",
             "docker": {
                "image": "alpine"
             }
