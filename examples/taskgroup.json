@@ -74,7 +74,7 @@
          "container": {
             "type": "MESOS",
             "docker": {
-               "image": "alpine"
+               "image": "centos:centos7.3.1611"
             }
          }
       }, {
