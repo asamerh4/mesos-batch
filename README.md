@@ -20,17 +20,11 @@ Use docker run --rm -it asamerh4/mesos-batch:#build-tag# mesos-batch
 
 ## usage
 ```
-    ___         ___
-   /  /|       |\  \
-  /  / /    ___\ \  \
- /  / /    |\__\\ \  \
-|\  \/  ___\|__| \/  /|
-\ \  \ |\__\     /  //
- \ \__\\|__|    /_ //
-  \|__|        |__|/
-commandline batch processing framework for mesos 1.1++ -> github.com/asamerh4/mesos-batch
+ ___  ___  ___
+|\__\|\__\|\__\  commandline batch processing framework for mesos 1.1++
+\|__|\|__|\|__|  github.com/asamerh4/mesos-batch
 
-Flag 'master' is required, but it was not provided
+Failed to load unknown flag 'h'
 
 Usage: mesos-batch [options]
 
