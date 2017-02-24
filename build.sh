@@ -18,4 +18,4 @@ docker run --rm -it -e MAKEFLAGS=-j$NPROC -v $ROOT_DIR/build-img/rpm:/out asamer
 
 docker build -t asamerh4/mesos-batch:$MESOS_BUILD .
 
-echo -e ${YELLOW}"**build finished -> use: docker run --rm -it asamerh4/mesos-batch:$MESOS_BUILD mesos-batch --h" ${NC}
+echo -e ${YELLOW}"**build finished -> use: docker run --rm -t asamerh4/mesos-batch:$MESOS_BUILD mesos-batch --h"${NC}
