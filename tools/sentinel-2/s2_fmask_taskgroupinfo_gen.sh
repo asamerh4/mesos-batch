@@ -54,8 +54,8 @@ jq 'map( . as $o | split("/")|
   ("command"): (env.command | fromjson |
     .environment.variables = 
     [
-      {"name":"inputId","value":(env.SOURCE_BUCKET+"/"+$o | rtrimstr(env.UNIQUE_FILE))},
-      {"name":"outputId","value":(env.TARGET_BUCKET+"/"+$o| rtrimstr(env.UNIQUE_FILE))},
+      {"name":"inputId","value":("s3://"+env.SOURCE_BUCKET+"/"+$o | rtrimstr(env.UNIQUE_FILE))},
+      {"name":"outputId","value":("s3://"+env.TARGET_BUCKET+"/"+$o| rtrimstr(env.UNIQUE_FILE))},
       {"name":"AWS_DEFAULT_REGION","value":(env.AWS_DEFAULT_REGION)}
     ]
   ),
