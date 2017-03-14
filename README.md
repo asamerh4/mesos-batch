@@ -1,14 +1,21 @@
 # mesos-batch
-commandline mesos batch processing framework (for mesos 1.1.X+) as docker image (still in early beta, not intended for production use)
+commandline mesos batch processing framework using Mesos V1 HTTP scheduler API for parallel job execution. (still in early beta, not intended for production use)
+
+## use cases
+- parallel arbitrary `one-off` tasks
+- creating persistent volumes
+- parallel tasks on e.g. shared persistent volumes (reduce steps)
 
 ## features
-- parallel job execution (multiple tasks specified in protobuf/JSON)
+- parallel job execution (multiple tasks specified as TaskInfos protobuf/JSON)
 - no task grouping like in pods, but queued execution within each offer (->parallel processing accross offers)
 - optional usage of dynamic reservations & subsequent creation of persistent volumes (specified via resources message of TaskInfo proto)
 - decoupled reserve/unreserve operations
+- interfaces with Mesos HTTP V1 API (-> no libmesos drivers needed)
+- released for linux/docker and native 64bit windows
 
 ## build
-use build.sh script to generate a mesos-batch docker image which contains a recent mesos build from asamerh4/mesos. Note that in the process of build.sh a temporary build-image is generated, which could be removed afterwards.
+use `build.sh` script to generate a `mesos-batch` docker image which contains a recent mesos build from asamerh4/mesos. Note that during the build process a temporary build-image is generated, which could be removed afterwards.
 
 Once build.sh finishes successfully a message like this should be displayed:
 ```sh
@@ -16,15 +23,13 @@ Successfully built de7bd82c8b50
 **build finished -> use: docker run --rm -it asamerh4/mesos-batch:3caf670 mesos-batch --h
 ```
 ## run
-Use docker run --rm -it asamerh4/mesos-batch:#build-tag# mesos-batch
+Use docker run --rm -it asamerh4/mesos-batch:`tag` mesos-batch
 
 ## usage
 ```
  ___  ___  ___
 |\__\|\__\|\__\  commandline batch processing framework for mesos 1.1++
 \|__|\|__|\|__|  github.com/asamerh4/mesos-batch
-
-Failed to load unknown flag 'h'
 
 Usage: mesos-batch [options]
 
@@ -116,45 +121,65 @@ Usage: mesos-batch [options]
                                          Example:
                                          {
                                            "tasks": [{
-                                                 "name": "sub01-docker",
-                                                 "task_id": {
-                                                    "value": "sub01-docker"
-                                                 },
-                                                 "agent_id": {
+                                                  "name": "S2_33UUU_2017_2_6_0",
+                                                  "task_id": {
+                                                    "value": "fmaskr_S2_33UUU_2017_2_6_0"
+                                                  },
+                                                  "agent_id": {
                                                     "value": ""
-                                                 },
-                                                 "resources": [{
-                                                       "name": "cpus",
-                                                       "type": "SCALAR",
-                                                       "scalar": {
-                                                          "value": 2.5
-                                                       },
-                                                       "role": "test",
-                                                       "reservation": {
-                                                          "principal": "test"
-                                                       }
-                                                    }, {
-                                                       "name": "mem",
-                                                       "type": "SCALAR",
-                                                       "scalar": {
-                                                          "value": 32
-                                                       },
-                                                       "role": "test",
-                                                       "reservation": {
-                                                          "principal": "test"
-                                                       }
+                                                  },
+                                                  "resources": [
+                                                    {
+                                                      "name": "cpus",
+                                                      "type": "SCALAR",
+                                                      "scalar": {
+                                                        "value": 1.5
+                                                      }
+                                                    },
+                                                    {
+                                                      "name": "mem",
+                                                      "type": "SCALAR",
+                                                      "scalar": {
+                                                        "value": 4000
+                                                      }
                                                     }
-                                                 ],
-                                                 "command": {
-                                                    "value": "ls -ltr && df"
-                                                 },
-                                                 "container": {
+                                                  ],
+                                                  "command": {
+                                                    "value": "./run-fmask.sh",
+                                                    "environment": {
+                                                      "variables": [
+                                                        {
+                                                          "name": "inputId",
+                                                          "value": "s3://s2-sync/tiles/33/U/UU/2017/2/6/0/"
+                                                        },
+                                                        {
+                                                          "name": "outputId",
+                                                          "value": "s3://s2-derived/tiles/33/U/UU/2017/2/6/0/"
+                                                        },
+                                                        {
+                                                          "name": "AWS_DEFAULT_REGION",
+                                                          "value": "eu-central-1"
+                                                        }
+                                                      ]
+                                                    }
+                                                  },
+                                                  "container": {
                                                     "type": "DOCKER",
                                                     "docker": {
-                                                       "image": "alpine"
+                                                      "image": "asamerh4/python-fmask:fmask0.4-aws-65775b8",
+                                                      "parameters": [
+                                                        {
+                                                          "key": "memory",
+                                                          "value": "12G"
+                                                        },
+                                                        {
+                                                          "key": "memory-swap",
+                                                          "value": "12G"
+                                                        }
+                                                      ]
                                                     }
-                                                 }
-                                              },{...},{...},{...},{...}
+                                                  }
+                                                },{...},{...},{...},{...}
                                            ]
                                          }
 ```
