@@ -2,7 +2,6 @@
 set -ex
 
 #Docker image fetcher for all mesos-agents
-#(c)Hubert Asamer 2017
 #jq required
 #Creates a TaskGroupInfo Object needed for 'mesos-batch'
 
@@ -14,7 +13,9 @@ set -ex
 
 #JSON skeletons for TaskInfo mesos.proto
 export TaskGroupInfo='{"tasks":[]}'
-export command='{"value":"docker pull '$DOCKER_IMAGE'"}'
+#use AWS ECS backed docker registry
+export ecr_login=$(aws ecr get-login --region eu-central-1)
+export command='{"value":"'$ecr_login' && docker pull '$DOCKER_IMAGE'"}'
 
 #query aws s3 and print TaskGroupInfo to stdout
 curl leader.mesos:5050/master/slaves | 
