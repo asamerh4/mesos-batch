@@ -25,5 +25,6 @@ pipeline {
     SOURCE_BUCKET = 's2-sync'
     TARGET_BUCKET = 's2-derived'
     UNIQUE_FILE = 'metadata.xml'
+    AWS_DEFAULT_REGION = 'eu-central-1'
   }
 }
