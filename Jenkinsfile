@@ -15,7 +15,7 @@ pipeline {
     }
     stage('test-user') {
       steps {
-        sh 'whoami'
+        sh 'pwd && ll /'
       }
     }
   }
