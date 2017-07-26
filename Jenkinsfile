@@ -19,7 +19,7 @@ pipeline {
     }
     stage('run mesos-batch') {
       steps {
-        sh 'sudo mesos-batch --master=174.0.1.41:5050 --task_list=file://tasks.json --framework_name=S2-fmaskd-32-U-PU-all-jenkins'
+        sh 'mesos-batch --master=174.0.1.41:5050 --task_list=file://tasks.json --framework_name=S2-fmaskd-32-U-PU-all-jenkins'
       }
     }
   }
