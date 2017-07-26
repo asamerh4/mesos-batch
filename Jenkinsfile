@@ -1,7 +1,10 @@
 pipeline {
   agent {
-    docker 'asamerh4/mesos-batch:f7ea7a1'
-  }
+    docker {
+        image 'asamerh4/mesos-batch:f7ea7a1'
+        args  '-u root'
+    }
+}
   stages {
     stage('fetch Sentinel-2 S3-refs') {
       steps {
