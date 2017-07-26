@@ -15,7 +15,7 @@ pipeline {
     }
     stage('test-user') {
       steps {
-        sh 'pwd && ll /'
+        sh 'pwd && ls'
       }
     }
   }
