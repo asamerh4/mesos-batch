@@ -1,10 +1,11 @@
 pipeline {
   agent {
     docker {
-        image 'asamerh4/mesos-batch:f7ea7a1'
-        args  '-u root'
+      image 'asamerh4/mesos-batch:f7ea7a1'
+      args '-u root'
     }
-}
+    
+  }
   stages {
     stage('fetch Sentinel-2 S3-refs') {
       steps {
@@ -18,7 +19,7 @@ pipeline {
     }
     stage('run mesos-batch') {
       steps {
-        sh 'mesos-batch --master=174.0.1.41:5050 --task_list=file://tasks.json --framework_name=S2-fmaskd-32-U-PU-all-jenkins'
+        sh 'sudo mesos-batch --master=174.0.1.41:5050 --task_list=file://tasks.json --framework_name=S2-fmaskd-32-U-PU-all-jenkins'
       }
     }
   }
