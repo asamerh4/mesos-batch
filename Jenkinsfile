@@ -13,6 +13,11 @@ pipeline {
         sh 'cat tasks.json | jq \'.tasks | .[] | .name\' | wc -l'
       }
     }
+    stage('test-user') {
+      steps {
+        sh 'whoami'
+      }
+    }
   }
   environment {
     COMMAND = './run-fmask.sh'
