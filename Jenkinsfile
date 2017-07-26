@@ -13,9 +13,9 @@ pipeline {
         sh 'cat tasks.json | jq \'.tasks | .[] | .name\' | wc -l'
       }
     }
-    stage('test-user') {
+    stage('run mesos-batch') {
       steps {
-        sh 'pwd && ls'
+        sh 'mesos-batch --master=174.0.1.41:5050 --task_list=file://tasks.json --framework_name=S2-fmaskd-32-U-PU-all-jenkins'
       }
     }
   }
