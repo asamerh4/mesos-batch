@@ -2,6 +2,7 @@ pipeline {
   agent {
     docker {
       image 'asamerh4/mesos-batch:f7ea7a1'
+      args '-u root'
     }
     
   }
