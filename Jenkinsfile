@@ -8,7 +8,7 @@ pipeline {
   stages {
     stage('fetch Sentinel-2 S3-refs') {
       steps {
-        sh './tools/sentinel-2/s2_fmask_taskgroupinfo_gen.sh > tasks.json'
+        sh 'tools/sentinel-2/s2_fmask_taskgroupinfo_gen.sh > tasks.json'
       }
     }
     stage('count S2-tiles') {
@@ -16,9 +16,9 @@ pipeline {
         sh 'cat tasks.json | jq \'.tasks | .[] | .name\' | wc -l'
       }
     }
-    stage('run mesos-batch') {
+    stage('fmask mesos-batch') {
       steps {
-        sh 'mesos-batch --master=174.0.1.46:5050 --task_list=file://tasks.json --framework_name=S2-fmaskd-32-U-PU-all-jenkins'
+        sh 'mesos-batch --master=$MESOS_MASTER --task_list=file://tasks.json --framework_name=$MESOS_FRAMEWORK_NAME'
       }
     }
     stage('report fmask results') {
@@ -34,10 +34,12 @@ pipeline {
     DOCKER_MEM = '12G'
     DOCKER_SWAP = '12G'
     MEM = '2000'
-    S3_PREFIX = 'tiles/22/M/DE/2017/04'
+    S3_PREFIX = 'tiles/22/M/DE/2017/4'
     SOURCE_BUCKET = 's2-sync'
     TARGET_BUCKET = 's2-derived'
     UNIQUE_FILE = 'metadata.xml'
     AWS_DEFAULT_REGION = 'eu-central-1'
+    MESOS_MASTER = '174.0.1.46:5050'
+    MESOS_FRAMEWORK_NAME = 'S2-fmaskd-AmazonDelta201704'
   }
 }
