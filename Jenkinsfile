@@ -2,7 +2,6 @@ pipeline {
   agent {
     docker {
       image 'asamerh4/mesos-batch:f7ea7a1'
-      args '-u root'
     }
     
   }
@@ -22,6 +21,11 @@ pipeline {
         sh 'mesos-batch --master=174.0.1.46:5050 --task_list=file://tasks.json --framework_name=S2-fmaskd-32-U-PU-all-jenkins'
       }
     }
+    stage('report fmask results') {
+      steps {
+        sh 'aws s3api list-objects-v2 --bucket $TARGET_BUCKET --prefix $S3_PREFIX --output json --query \'Contents[*].Key | [?contains(@, `\'CLOUDMASK.tif\'`) == `true`]\''
+      }
+    }
   }
   environment {
     COMMAND = './run-fmask.sh'
@@ -30,7 +34,7 @@ pipeline {
     DOCKER_MEM = '12G'
     DOCKER_SWAP = '12G'
     MEM = '2000'
-    S3_PREFIX = 'tiles/22/M/DE/2017'
+    S3_PREFIX = 'tiles/22/M/DE/2017/04'
     SOURCE_BUCKET = 's2-sync'
     TARGET_BUCKET = 's2-derived'
     UNIQUE_FILE = 'metadata.xml'
