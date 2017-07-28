@@ -35,12 +35,12 @@ pipeline {
     DOCKER_MEM = '12G'
     DOCKER_SWAP = '12G'
     MEM = '2000'
-    S3_PREFIX = 'tiles/22/M/DE/2017/4/17'
+    S3_PREFIX = 'tiles/54/M/TA'
     SOURCE_BUCKET = 's2-sync'
     TARGET_BUCKET = 's2-derived'
     UNIQUE_FILE = 'metadata.xml'
     AWS_DEFAULT_REGION = 'eu-central-1'
-    MESOS_MASTER = '174.0.1.46:5050'
-    MESOS_FRAMEWORK_NAME = 'S2-fmaskd-AmazonDelta20170417'
+    MESOS_MASTER = '174.0.1.117:5050'
+    MESOS_FRAMEWORK_NAME = 'S2-fmaskd-Papua54MTA'
   }
 }
