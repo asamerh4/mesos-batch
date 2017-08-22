@@ -22,7 +22,7 @@ pipeline {
         sh 'mesos-batch --master=$MESOS_MASTER --task_list=file://tasks.json --framework_name=$MESOS_FRAMEWORK_NAME'
       }
     }
-    stage('report fmask results (list tifs)') {
+    stage('report fmask results') {
       steps {
         sh 'aws s3api list-objects-v2 --bucket $TARGET_BUCKET --prefix $S3_PREFIX --output json --query \'Contents[*].Key | [?contains(@, `\'CLOUDMASK.tif\'`) == `true`]\''
       }
