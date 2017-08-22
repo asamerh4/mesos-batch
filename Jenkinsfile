@@ -40,7 +40,7 @@ pipeline {
     TARGET_BUCKET = 's2-derived'
     UNIQUE_FILE = 'metadata.xml'
     AWS_DEFAULT_REGION = 'eu-central-1'
-    MESOS_MASTER = '174.0.1.221:5050'
+    MESOS_MASTER = '174.0.1.210:5050'
     MESOS_FRAMEWORK_NAME = 'S2-fmaskd-Papua54MTA'
   }
 }
