@@ -28,9 +28,9 @@ pipeline {
     }
     stage('aggregate results -> `reduce`') {
       steps {
-        "report fmask results": {
+       
           sh 'aws s3api list-objects-v2 --bucket $TARGET_BUCKET --prefix $S3_PREFIX --output json --query \'Contents[*].Key | [?contains(@, `\'CLOUDMASK.tif\'`) == `true`]\''
-        }
+        
       }
     }
   }
