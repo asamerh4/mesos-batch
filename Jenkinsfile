@@ -24,7 +24,7 @@ pipeline {
             
           },
           "list mesos tasklist": {
-            sh 'cat tasks.json | jq'
+            sh 'cat tasks.json'
             
           }
         )
