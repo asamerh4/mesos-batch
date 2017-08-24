@@ -20,7 +20,8 @@ pipeline {
             
           },
           "count S2-tiles & list mesos tasks": {
-            sh 'cat tasks.json | jq \'.tasks | .[] | .name\' | wc -l && cat tasks.json | jq'
+            sh '''cat tasks.json | jq '.tasks | .[] | .name' | wc -l
+cat tasks.json | jq'''
             
           },
           "dummy task": {
