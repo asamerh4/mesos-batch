@@ -35,7 +35,7 @@ pipeline {
     DOCKER_MEM = '12G'
     DOCKER_SWAP = '12G'
     MEM = '2000'
-    S3_PREFIX = 'tiles/54/M/TA/2017/5/'
+    S3_PREFIX = 'tiles/54/M/TA/2017/6/'
     SOURCE_BUCKET = 's2-sync'
     TARGET_BUCKET = 's2-derived'
     UNIQUE_FILE = 'metadata.xml'
