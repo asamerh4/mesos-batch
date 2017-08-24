@@ -9,7 +9,16 @@ pipeline {
   stages {
     stage('fetch Sentinel-2 S3-refs') {
       steps {
-        sh 'tools/sentinel-2/s2_fmask_taskgroupinfo_gen.sh > tasks.json'
+        parallel(
+          "fetch Sentinel-2 S3-refs": {
+            sh 'tools/sentinel-2/s2_fmask_taskgroupinfo_gen.sh > tasks.json'
+            
+          },
+          "list tasks": {
+            sh 'cat tasks.json | jq'
+            
+          }
+        )
       }
     }
     stage('do the parallel processing [map]') {
@@ -22,15 +31,17 @@ pipeline {
           "count S2-tiles": {
             sh 'cat tasks.json | jq \'.tasks | .[] | .name\' | wc -l'
             
+          },
+          "dummy task": {
+            sh 'ls -ltr && ls -l / && df -h'
+            
           }
         )
       }
     }
     stage('aggregate results [reduce]') {
       steps {
-       
-          sh 'aws s3api list-objects-v2 --bucket $TARGET_BUCKET --prefix $S3_PREFIX --output json --query \'Contents[*].Key | [?contains(@, `\'CLOUDMASK.tif\'`) == `true`]\''
-        
+        sh 'aws s3api list-objects-v2 --bucket $TARGET_BUCKET --prefix $S3_PREFIX --output json --query \'Contents[*].Key | [?contains(@, `\'CLOUDMASK.tif\'`) == `true`]\''
       }
     }
   }
