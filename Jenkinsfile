@@ -9,16 +9,7 @@ pipeline {
   stages {
     stage('fetch Sentinel-2 S3-refs') {
       steps {
-        parallel(
-          "fetch Sentinel-2 S3-refs": {
-            sh 'tools/sentinel-2/s2_fmask_taskgroupinfo_gen.sh > tasks.json'
-            
-          },
-          "list tasks": {
-            sh 'cat tasks.json | jq'
-            
-          }
-        )
+        sh 'tools/sentinel-2/s2_fmask_taskgroupinfo_gen.sh > tasks.json'
       }
     }
     stage('do the parallel processing [map]') {
@@ -28,8 +19,8 @@ pipeline {
             sh 'mesos-batch --master=$MESOS_MASTER --task_list=file://tasks.json --framework_name=$MESOS_FRAMEWORK_NAME'
             
           },
-          "count S2-tiles": {
-            sh 'cat tasks.json | jq \'.tasks | .[] | .name\' | wc -l'
+          "count S2-tiles & list mesos tasks": {
+            sh 'cat tasks.json | jq \'.tasks | .[] | .name\' | wc -l && cat tasks.json | jq'
             
           },
           "dummy task": {
