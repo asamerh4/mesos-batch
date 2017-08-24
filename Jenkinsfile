@@ -12,7 +12,7 @@ pipeline {
         sh 'tools/sentinel-2/s2_fmask_taskgroupinfo_gen.sh > tasks.json'
       }
     }
-    stage('fmask mesos-batch') {
+    stage('do the parallel processing -> `map`') {
       steps {
         parallel(
           "fmask mesos-batch": {
@@ -26,9 +26,11 @@ pipeline {
         )
       }
     }
-    stage('report fmask results') {
+    stage('aggregate results -> `reduce`') {
       steps {
-        sh 'aws s3api list-objects-v2 --bucket $TARGET_BUCKET --prefix $S3_PREFIX --output json --query \'Contents[*].Key | [?contains(@, `\'CLOUDMASK.tif\'`) == `true`]\''
+        "report fmask results": {
+          sh 'aws s3api list-objects-v2 --bucket $TARGET_BUCKET --prefix $S3_PREFIX --output json --query \'Contents[*].Key | [?contains(@, `\'CLOUDMASK.tif\'`) == `true`]\''
+        }
       }
     }
   }
