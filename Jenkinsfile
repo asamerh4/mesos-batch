@@ -12,14 +12,18 @@ pipeline {
         sh 'tools/sentinel-2/s2_fmask_taskgroupinfo_gen.sh > tasks.json'
       }
     }
-    stage('count S2-tiles') {
-      steps {
-        sh 'cat tasks.json | jq \'.tasks | .[] | .name\' | wc -l'
-      }
-    }
     stage('fmask mesos-batch') {
       steps {
-        sh 'mesos-batch --master=$MESOS_MASTER --task_list=file://tasks.json --framework_name=$MESOS_FRAMEWORK_NAME'
+        parallel(
+          "fmask mesos-batch": {
+            sh 'mesos-batch --master=$MESOS_MASTER --task_list=file://tasks.json --framework_name=$MESOS_FRAMEWORK_NAME'
+            
+          },
+          "count S2-tiles": {
+            sh 'cat tasks.json | jq \'.tasks | .[] | .name\' | wc -l'
+            
+          }
+        )
       }
     }
     stage('report fmask results') {
