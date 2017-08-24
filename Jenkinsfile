@@ -19,13 +19,12 @@ pipeline {
             sh 'mesos-batch --master=$MESOS_MASTER --task_list=file://tasks.json --framework_name=$MESOS_FRAMEWORK_NAME'
             
           },
-          "count S2-tiles & list mesos tasks": {
-            sh '''cat tasks.json | jq '.tasks | .[] | .name' | wc -l
-cat tasks.json | jq'''
+          "count S2-tiles": {
+            sh 'cat tasks.json | jq \'.tasks | .[] | .name\' | wc -l'
             
           },
-          "dummy task": {
-            sh 'ls -ltr && ls -l / && df -h'
+          "list mesos tasklist": {
+            sh 'cat tasks.json | jq'
             
           }
         )
